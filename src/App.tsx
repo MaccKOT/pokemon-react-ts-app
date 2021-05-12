@@ -1,37 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { Box } from '@fower/react';
 import { styled } from '@fower/styled';
-
-interface Pokemon {
-  id: number;
-  name: {
-    english: string;
-    japanese: string;
-  };
-  type: string[];
-  base: Record<string, number>;
-}
+import usePokemon from './usePokemon'; // our own custom hook
 
 const Input = styled('input');
 
 function App() {
-  const [filter, setFilter] = useState('');
-  const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
+  const [count, setCount] = useState(1);
+  const { filter, setFilter, pokemon } = usePokemon();
 
   useEffect(() => {
-    fetch('./pokemon.json')
-      .then((resp) => resp.json())
-      .then((pokemon: Pokemon[]) => setAllPokemon(pokemon));
-  }, []);
+    console.log('setFilter change');
+  }, [setFilter]);
 
-  const lcFilter = filter.toLowerCase();
-  const pokemon = allPokemon
-    .filter(({ name: { english } }) => english.toLowerCase().includes(lcFilter))
-    .slice(0, 10);
+  const onSetFilter = useCallback(
+    (evt) => setFilter(evt.target.value),
+    [setFilter]
+  );
 
   return (
     <Box p-10 maxW-1200 m-auto>
+      <button onClick={() => setCount(count + 1)}>bump count = {count}</button>
       <Input
         p-5
         text4XL
@@ -40,7 +30,7 @@ function App() {
         borderGray500
         w='100%'
         value={filter}
-        onChange={(evt) => setFilter(evt.target.value)}
+        onChange={onSetFilter}
       />
       <Box>
         {pokemon.map((pokemon) => (

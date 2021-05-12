@@ -4,4 +4,6 @@ Video by Jack Herrington: [https://www.youtube.com/watch?v=xdJQ1GtUQCg](https://
 
 React, Typescript, Fower
 
+Live demo: [https://zen-jang-7c08d1.netlify.app](https://zen-jang-7c08d1.netlify.app)
+
 Built with ⚡ Vite

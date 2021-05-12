@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import './App.css';
-import { Box, Image } from '@fower/react';
+import { Box } from '@fower/react';
 import { styled } from '@fower/styled';
 import usePokemon from './usePokemon'; // our own custom hook
+import PokemonCard from './PokemonCard';
 
 const Input = styled('input');
 
@@ -26,26 +27,14 @@ function App() {
         value={filter}
         onChange={onSetFilter}
       />
-      <Box mt-10 grid gridTemplateColumns-2 gap-10>
+      <Box
+        mt-10
+        grid
+        gridTemplateColumns-2--md
+        gridTemplateColumns-1--sm
+        gap-10>
         {pokemon.map((pokemon) => (
-          <Box
-            key={pokemon.id}
-            text3XL
-            m-10
-            p-10
-            border-1
-            borderGray500
-            roundedXL
-            grid
-            gridTemplateColumns-2
-            gap-10>
-            <Image
-              rounded2XL
-              src={`https://dummyimage.com/320x200/a1a1a1/ffffff.jpg&text=No+image+provided`}
-              w='100%'
-            />
-            <Box textLG>{pokemon.name.english}</Box>
-          </Box>
+          <PokemonCard key={pokemon.id} {...pokemon} />
         ))}
       </Box>
     </Box>

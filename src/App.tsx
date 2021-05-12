@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import './App.css';
-import { Box } from '@fower/react';
+import { Box, Image } from '@fower/react';
 import { styled } from '@fower/styled';
 import usePokemon from './usePokemon'; // our own custom hook
 
 const Input = styled('input');
 
 function App() {
-  const [count, setCount] = useState(1);
   const { filter, setFilter, pokemon } = usePokemon();
-
-  useEffect(() => {
-    console.log('setFilter change');
-  }, [setFilter]);
 
   const onSetFilter = useCallback(
     (evt) => setFilter(evt.target.value),
@@ -21,7 +16,6 @@ function App() {
 
   return (
     <Box p-10 maxW-1200 m-auto>
-      <button onClick={() => setCount(count + 1)}>bump count = {count}</button>
       <Input
         p-5
         text4XL
@@ -32,10 +26,25 @@ function App() {
         value={filter}
         onChange={onSetFilter}
       />
-      <Box>
+      <Box mt-10 grid gridTemplateColumns-2 gap-10>
         {pokemon.map((pokemon) => (
-          <Box key={pokemon.id} text3XL>
-            {pokemon.name.english}
+          <Box
+            key={pokemon.id}
+            text3XL
+            m-10
+            p-10
+            border-1
+            borderGray500
+            roundedXL
+            grid
+            gridTemplateColumns-2
+            gap-10>
+            <Image
+              rounded2XL
+              src={`https://dummyimage.com/320x200/a1a1a1/ffffff.jpg&text=No+image+provided`}
+              w='100%'
+            />
+            <Box textLG>{pokemon.name.english}</Box>
           </Box>
         ))}
       </Box>

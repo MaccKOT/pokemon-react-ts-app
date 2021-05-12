@@ -59,7 +59,9 @@ const PokemonCard: React.FunctionComponent<
       grid-30-70>
       <Image
         rounded2XL
-        src={IMAGE_URL + name.english.toLowerCase() + '.jpg'}
+        src={
+          IMAGE_URL + name.english.toLowerCase().replace(/\s+/g, '-') + '.jpg'
+        }
         w='100%'
       />
       <Box>

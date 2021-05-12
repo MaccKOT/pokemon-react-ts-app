@@ -20,8 +20,10 @@ export default function usePokemon(): {
   const [filter, setFilter] = useState('');
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
 
+  const URL_TO_DB = `https://raw.githubusercontent.com/jherr/fower-react-pokemon/master/public/pokemon.json`;
+
   useEffect(() => {
-    fetch('/pokemon.json')
+    fetch(URL_TO_DB)
       .then((resp) => resp.json())
       .then((pokemon: Pokemon[]) => setAllPokemon(pokemon));
   }, []);

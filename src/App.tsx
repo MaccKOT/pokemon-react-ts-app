@@ -8,7 +8,7 @@ import PokemonCard from './PokemonCard';
 const Input = styled('input');
 
 function App() {
-  const { filter, setFilter, pokemon } = usePokemon();
+  const { filter, setFilter, pokemon, selectPokemon, selected } = usePokemon();
 
   const onSetFilter = useCallback(
     (evt) => setFilter(evt.target.value),
@@ -34,7 +34,12 @@ function App() {
         gridTemplateColumns-1--sm
         gap-10>
         {pokemon.map((pokemon) => (
-          <PokemonCard key={pokemon.id} {...pokemon} />
+          <PokemonCard
+            key={pokemon.id}
+            {...pokemon}
+            selected={selected.has(pokemon.name.english)}
+            onSelected={selectPokemon}
+          />
         ))}
       </Box>
     </Box>
